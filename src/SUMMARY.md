@@ -4,4 +4,4 @@
 
 # Basic Design Principles
 
-- []
+- [Test page](./test.md)
