@@ -1,0 +1,3 @@
+# Introduction
+
+Howdy! My name is Drew Deaton. I am the team ambassador for Aggie Robotics, and I have served as the software lead for our organization for the past 2 years, leading development of ReveilLib. In fact, I've been doing Vex since the Toss Up season, so I've been around for a while! More importantly than all of that, though, I am the loudest and the proudest member of the Fightin' Texas Aggie Class of 2025. Over these years, I've seen the Vex programming landscape shift massively, and I've seen what works, and I've seen what doesn't. In this book, I will attempt to pass on that knowledge.

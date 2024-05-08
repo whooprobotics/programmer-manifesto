@@ -1,0 +1,6 @@
+[book]
+authors = ["Drew Deaton"]
+language = "en"
+multilingual = false
+src = "src"
+title = "The Vex Programmer's Manifesto"
