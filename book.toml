@@ -6,5 +6,6 @@ src = "src"
 title = "The Vex Programmer's Manifesto"
 
 [output.html]
+mathjax-support = true
 git-repository-url = "https://github.com/whooprobotics/programmer-manifesto/tree/master"
 edit-url-template = "https://github.com/whooprobotics/programmer-manifesto/tree/master/{path}"
