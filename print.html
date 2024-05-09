@@ -182,7 +182,40 @@
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>Howdy! My name is Drew Deaton. I am the team ambassador for Aggie Robotics, and I have served as the software lead for our organization for the past 2 years, leading development of ReveilLib. In fact, I've been doing Vex since the Toss Up season, so I've been around for a while! More importantly than all of that, though, I am the loudest and the proudest member of the Fightin' Texas Aggie Class of 2025. Over these years, I've seen the Vex programming landscape shift massively, and I've seen what works, and I've seen what doesn't. In this book, I will attempt to pass on that knowledge.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="writing-better-code"><a class="header" href="#writing-better-code">Writing better code</a></h1>
+<p>Fundamentally, one of the most important things when you are learning to write more effective code is learning to write better code. What do I mean by "better"? When I say "better", I mean code that is:</p>
+<ul>
+<li><strong>Easily maintainable</strong> - Your code should be written in such a way that future development on your project doesn't require massive changes, and what bugs you leave in should be relatively easy to find and remove.</li>
+<li><strong>Easily usable</strong> - Your code needs to be designed in a way where any other programmer on your team can pick it up and use it. This means you need to write effective documentation, include <em>helpful</em> comments, and, most importantly, simply write code that describes itself.</li>
+<li><strong>Extensible</strong> - While not always a requirement, especially if your project has a very narrow scope and you can be completely sure it will never have to expand, software (especially in a library) needs to be written to be easily extended with minimal or preferably no modification to the base code.</li>
+</ul>
+<p>With that in mind, this section of the book will focus on improving the quality of your code.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="organization"><a class="header" href="#organization">Organization</a></h1>
+<p>Organization is critical to code structure. Different parts of your code need to go in different files so they can make sense. This is actually a big reason why Java is such a great language to learn; Java almost forces you to organize things into different directories. However, in Vex we mostly use C++, so lets look at a few of the tools C++ gives us to work with.</p>
+<h1 id="header-and-source-files"><a class="header" href="#header-and-source-files">Header and Source Files</a></h1>
+<p>C++ has 2 basic types of files:</p>
+<ul>
+<li>Source files
+<ul>
+<li>Typically end in <code>.cc</code>, <code>.cpp</code>, <code>.cxx</code>, or, rarely, <code>.C</code> (note the capitalization) or <code>.c++</code></li>
+<li>Contain code that performs actions, such as function definitions and global variable definitions</li>
+<li>Usually found in the <code>src</code> directory, or any of its subdirectories</li>
+</ul>
+</li>
+<li>Header files
+<ul>
+<li>Typically end in <code>.h</code>, <code>.hh</code>, <code>.hpp</code>, <code>.hxx</code>, <code>.H</code>, <code>.h++</code>, or occasionally, nothing at all</li>
+<li>Contain class and struct definitions, as well as <code>extern</code> variable declarations</li>
+<li>Usually found in the <code>include</code> directory, but occasionally found alongside its corresponding source file</li>
+</ul>
+</li>
+</ul>
+<p>To avoid ambiguity, I highly recommend avoiding using <code>.C</code>, <code>.H</code>, and <code>.h</code>, as well as nothing at all. You should also avoid <code>.C</code>, <code>.H</code>, <code>.h++</code>, and <code>.c++</code> due to incompatibilities between operating systems. For consistency, you should probably pick one of the following:</p>
+<ul>
+<li><code>.cc</code> and <code>.hh</code></li>
+<li><code>.cpp</code> and <code>.hpp</code></li>
+<li><code>.cxx</code> and <code>.hxx</code></li>
+</ul>
+<p>It is also common to see a mix-and-match approach, particularly with <code>.cc</code> and <code>.hpp</code>, but I prefer to avoid this, as it just looks nicer to keep the extensions similar, but really that is up to personal preference.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="styling"><a class="header" href="#styling">Styling</a></h1>
 
                     </main>
