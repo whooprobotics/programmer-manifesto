@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The Vex Programmer&#x27;s Manifesto</title>
-        <meta name="robots" content="noindex">
+        <title>Styling - The Vex Programmer&#x27;s Manifesto</title>
 
 
         <!-- Custom HTML head -->
@@ -13,21 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -38,7 +37,7 @@
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
-            var path_to_root = "";
+            var path_to_root = "../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -91,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic Design Principles</li><li class="chapter-item expanded "><a href="guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li class="chapter-item expanded "><a href="guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic Design Principles</li><li class="chapter-item expanded "><a href="../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li class="chapter-item expanded "><a href="../../guide/code-quality/styling.html" class="active"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -147,11 +146,14 @@
                     <h1 class="menu-title">The Vex Programmer&#x27;s Manifesto</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master/src/guide/code-quality/styling.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
                     </div>
@@ -179,16 +181,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>Howdy! My name is Drew Deaton. I am the team ambassador for Aggie Robotics, and I have served as the software lead for our organization for the past 2 years, leading development of ReveilLib. In fact, I've been doing Vex since the Toss Up season, so I've been around for a while! More importantly than all of that, though, I am the loudest and the proudest member of the Fightin' Texas Aggie Class of 2025. Over these years, I've seen the Vex programming landscape shift massively, and I've seen what works, and I've seen what doesn't. In this book, I will attempt to pass on that knowledge.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="writing-better-code"><a class="header" href="#writing-better-code">Writing better code</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="organization"><a class="header" href="#organization">Organization</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="styling"><a class="header" href="#styling">Styling</a></h1>
+                        <h1 id="styling"><a class="header" href="#styling">Styling</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../guide/code-quality/organization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
 
                         <div style="clear: both"></div>
@@ -197,6 +198,9 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../guide/code-quality/organization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
             </nav>
 
@@ -210,23 +214,16 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
 
         <!-- Custom JS scripts -->
 
-        <script>
-        window.addEventListener('load', function() {
-            MathJax.Hub.Register.StartupHook('End', function() {
-                window.setTimeout(window.print, 100);
-            });
-        });
-        </script>
 
     </div>
     </body>
