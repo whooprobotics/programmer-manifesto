@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "The Vex Programmer's Manifesto"
+
+[output.html]
+git-repository-url = "https://github.com/whooprobotics/programmer-manifesto/tree/master"
+edit-url-template = "https://github.com/whooprobotics/programmer-manifesto/tree/master/{path}"
