@@ -2,7 +2,7 @@
 
 [Introduction](./introduction.md)
 
-# Basic Design Principles
+# The Vex Programmer's Manifesto
 
 - [Writing better code](./guide/code-quality/code-quality.md)
   - [Organization](./guide/code-quality/organization.md)
