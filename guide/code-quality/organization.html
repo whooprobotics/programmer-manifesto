@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic Design Principles</li><li class="chapter-item expanded "><a href="../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guide/code-quality/organization.html" class="active"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li class="chapter-item expanded "><a href="../../guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Basic Design Principles</li><li class="chapter-item expanded "><a href="../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guide/code-quality/organization.html" class="active"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="../../guide/code-quality/organization/namespaces.html"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li></ol></li><li class="chapter-item expanded "><a href="../../guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -183,123 +183,11 @@
                     <main>
                         <h1 id="organization"><a class="header" href="#organization">Organization</a></h1>
 <p>Organization is critical to code structure. Different parts of your code need to go in different files so they can make sense. This is actually a big reason why Java is such a great language to learn; Java almost forces you to organize things into different directories. However, in Vex we mostly use C++, so lets look at a few of the tools C++ gives us to work with.</p>
-<h1 id="header-and-source-files"><a class="header" href="#header-and-source-files">Header and Source Files</a></h1>
-<p>C++ has 2 basic types of files:</p>
+<p>In this section I will go over:</p>
 <ul>
-<li>Source files
-<ul>
-<li>Typically end in <code>.cc</code>, <code>.cpp</code>, <code>.cxx</code>, or, rarely, <code>.C</code> (note the capitalization) or <code>.c++</code></li>
-<li>Contain code that performs actions, such as function definitions and global variable definitions</li>
-<li>Usually found in the <code>src</code> directory, or any of its subdirectories</li>
+<li><a href="./organization/headers.html">Headers</a></li>
+<li><a href="./organization/namespaces.html">Namespaces</a></li>
 </ul>
-</li>
-<li>Header files
-<ul>
-<li>Typically end in <code>.h</code>, <code>.hh</code>, <code>.hpp</code>, <code>.hxx</code>, <code>.H</code>, <code>.h++</code>, or occasionally, nothing at all</li>
-<li>Contain class and struct definitions, as well as <code>extern</code> variable declarations</li>
-<li>Usually found in the <code>include</code> directory, but occasionally found alongside its corresponding source file</li>
-</ul>
-</li>
-</ul>
-<p>To avoid ambiguity, I highly recommend avoiding using <code>.C</code>, <code>.H</code>, and <code>.h</code>, as well as nothing at all. You should also avoid <code>.C</code>, <code>.H</code>, <code>.h++</code>, and <code>.c++</code> due to incompatibilities between operating systems. For consistency, you should probably pick one of the following:</p>
-<ul>
-<li><code>.cc</code> and <code>.hh</code></li>
-<li><code>.cpp</code> and <code>.hpp</code></li>
-<li><code>.cxx</code> and <code>.hxx</code></li>
-</ul>
-<p>It is also common to see a mix-and-match approach, particularly with <code>.cc</code> and <code>.hpp</code>, but I prefer to avoid this, as it just looks nicer to keep the extensions similar, but really that is up to personal preference. For the purposes of this book, I will be using <code>.cc</code> and <code>.hh</code> throughout the rest, but do know that this all applies no matter which pair of extensions you choose.</p>
-<h2 id="proper-usage-of-headers-and-source"><a class="header" href="#proper-usage-of-headers-and-source">Proper usage of headers and source</a></h2>
-<p>Splitting code between headers and source files is one of the hardest things for a new C++ programmer to wrap their head around. Here are the general uses of the two types of files.</p>
-<h3 id="corresponding-headers-and-source-files"><a class="header" href="#corresponding-headers-and-source-files">Corresponding headers and source files</a></h3>
-<p>A common practice is to have 1 header per source file. Typically, there are 3 ways to approach this, which don't really have names, but for the sake of this document I am going to give them names.</p>
-<ul>
-<li>The Mirror Method
-<ul>
-<li>Every source file has a header with the same path, but in <code>include</code></li>
-<li><code>src/quux/mirror.cc</code> \( \rightarrow \) <code>include/quux/mirror.hh</code></li>
-</ul>
-</li>
-<li>The Library Method
-<ul>
-<li>Similar to the mirror method, except its all kept in a subdirectory</li>
-<li><code>src/quux/library.cc</code> \( \rightarrow \) <code>include/[Library Name]/quux/library.hh</code></li>
-<li>Typically a prelude header is placed in the <code>include/[Library Name]/</code> directory</li>
-<li>ReveilLib uses this, since it is a library</li>
-</ul>
-</li>
-<li>The Neighbor Method
-<ul>
-<li>Corresponding headers are kept right next to their source file</li>
-<li><code>src/quux/neighbor.cc</code> \( \rightarrow \) <code>src/quux/neighbor.hh</code></li>
-</ul>
-</li>
-</ul>
-<p>I will be using the Mirror method for my examples, but you can see how things apply.</p>
-<h3 id="including-headers"><a class="header" href="#including-headers">Including headers</a></h3>
-<p>Typically, you will see at the top of a source file (or even at the top of header files) something that looks like this:</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include "rev.hh"
-</code></pre>
-<p>What <code>include</code> directives do is copy the contents of the specified header file to their location, but you don't need to know the exact mechanics to understand what it does. The real purpose of this is that it enables a file that includes a header to access anything that the specified header declares. There are 2 main types of <code>include</code> directives.</p>
-<p>A system header directive is usually used to include something from the standard library, which is a core part of the C++ language. These files are not found in your <code>include</code> directory, but rather wherever your chosen compiler on your chosen operating system stores them. For example, if you include <code>iostream</code>, you get to use <code>cout</code> to print to the terminal.</p>
-<pre><code class="language-cpp">/* src/main.cc */
-
-#include &lt;iostream&gt;
-
-int main() {
-  std::cout &lt;&lt; "Hello world!" &lt;&lt; std::endl;
-}
-</code></pre>
-<p>prints</p>
-<pre><code>Hello World!
-</code></pre>
-<p>A file header, on the other hand, is usually used to include a header from your own project, or from a library you are using. For example,</p>
-<pre><code class="language-cpp">/* include/foo.hh */
-/* Note: this file contains a terrible practice that is defining a function in a header. More on this later. */
-
-#include &lt;iostream&gt;
-
-void print_hello_world() {
-  std::cout &lt;&lt; "Hello world!" &lt;&lt; std::endl;
-}
-</code></pre>
-<p>alongside</p>
-<pre><code class="language-cpp">/* src/main.cc */
-
-#include "foo.hh"
-
-int main() {
-  print_hello_world();
-}
-</code></pre>
-<p>will print</p>
-<pre><code>Hello World!
-</code></pre>
-<h3 id="include-guards"><a class="header" href="#include-guards">Include guards</a></h3>
-<p>As mentioned before, when a header is included, it copies its full contents. This can include more include directives which include more headers and so on. There is, however, a problem with this. If you have multiple headers which depend on the same header, and all of them are included, and they all include the header they depend on, you might end up with multiple copies of the same header file being imported. This is almost always a bad thing, but fortunately we have a solution: include guards.</p>
-<p>There are 2 types of include guards. The first and most common type uses preprocessor directives to tell the compiler to omit the contents of the file if they've already been included:</p>
-<pre><code class="language-cpp">/* include/bar/baz.hh */
-#ifndef INCLUDE_BAR_BAZ
-#define INCLUDE_BAR_BAZ
-/* File contents here */
-#endif
-</code></pre>
-<p>This is common for a reason: it has worked for a long time and works with every ISO-compliant C++ compiler. However, it can be a little bit bulky, so theres an alternative.</p>
-<pre><code class="language-cpp">/* include/bar/baz.hh */
-#pragma once
-/* File contents here */
-</code></pre>
-<p>This solution can theoretically be faster on modern compilers, but officially it is not part of the ISO C++ spec. However, for the purposes of Vex, you will never encounter a compiler that doesn't support <code>#pragma once</code>, and even in the real world its pretty unlikely.</p>
-<h3 id="declarations"><a class="header" href="#declarations">Declarations</a></h3>
-<p>A declaration is where you essentially tell the compiler "hey, this exists." For a function, this might look like this:</p>
-<pre><code class="language-cpp">int foo(int bar); /* Notice the lack of a code block */
-</code></pre>
-<p>This is not a definition; the function does not have an attached code block. As such, if you try to call it, the compiler will give you an error. We will see how to attach a declaration to this soon.</p>
-<p>Global variables also have a way of being declared, without being defined.</p>
-<pre><code class="language-cpp">extern int baz;
-</code></pre>
-<p>The <code>extern</code> keyword here is... well, key. It tells the compiler "this exists already, its defined elsewhere, so you don't need to allocate memory for it." This is very important, because if you declare 2 global variables with the same name, the compiler won't know which is which, and even if that worked, you'd be in a tight spot, since your 2 files would be accessing different variables.</p>
-<p>Generally, declarations belong in header files. Specifically, convention is to have a header file that sort-of mirrors a source file with corresponding definitions; that is, if your source file is located at <code>src/quux/my_file.cc</code>, your header would be at <code>include/quux/my_file.hh</code>. Let's take a look at how those work now.</p>
 
                     </main>
 
@@ -309,7 +197,7 @@ int main() {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../guide/code-quality/styling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../guide/code-quality/organization/headers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -323,7 +211,7 @@ int main() {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../guide/code-quality/styling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../guide/code-quality/organization/headers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
