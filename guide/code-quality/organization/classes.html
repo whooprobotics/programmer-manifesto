@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Namespaces - The Vex Programmer&#x27;s Manifesto</title>
+        <title>Classes - The Vex Programmer&#x27;s Manifesto</title>
 
 
         <!-- Custom HTML head -->
@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Vex Programmer's Manifesto</li><li class="chapter-item expanded "><a href="../../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/namespaces.html" class="active"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/classes.html"><strong aria-hidden="true">1.1.3.</strong> Classes</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.1.4.</strong> File and Folder Structure</div></li></ol></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Vex Programmer's Manifesto</li><li class="chapter-item expanded "><a href="../../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/namespaces.html"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/classes.html" class="active"><strong aria-hidden="true">1.1.3.</strong> Classes</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.1.4.</strong> File and Folder Structure</div></li></ol></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -152,7 +152,7 @@
                         <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master/src/guide/code-quality/organization/namespaces.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master/src/guide/code-quality/organization/classes.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -181,113 +181,100 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="namespaces"><a class="header" href="#namespaces">Namespaces</a></h1>
-<p>Namespaces are an extremely useful feature in C++. Like how folders allow you to sort files, namespaces allow you to sort functions, variables, and other declarations. The basic structure of a namespace is this:</p>
-<pre><code class="language-cpp">namespace foo {
-  int bar;
-  void baz();
-}
+                        <h1 id="classes"><a class="header" href="#classes">Classes</a></h1>
+<p>Classes are arguably the feature where C++ becomes C++. They are what makes C++ an object-oriented programming language. For you Java developers, this is probably the area you will be most comfortable with. Classes are very complex and so I can't cover everything about them, but I will try to get the basics of what they are and how to use them done here.</p>
+<p>A class (or, almost equivalently, a struct) is a custom variable type, which can include multiple member variables, member functions (which we call methods), and even other classes/structs inside.</p>
+<h2 id="declaration"><a class="header" href="#declaration">Declaration</a></h2>
+<p>Like with namespaces, classes, alongside all of their members, should be declared in a header, however since they are part of an object and not in the global namespace, you don't need to include <code>extern</code>, and you don't need to define class members in the accompanying source file. Let's take a look at an example:</p>
+<pre><code class="language-cpp">/* my-class.hh */
+class MyClass {
+ public:
+  static void foo();
+ private:
+  int bar {0}; // Initializing in the header file is okay here, since these are members of the class, and don't "really" exist
+};
 </code></pre>
-<p>Definitions can also be put inside a namespace, however namespace declarations like above are best kept in header files.</p>
-<p>From outside of a namespace, there are 2 ways to access its internals. You can use the scope operator <code>::</code>, as follows:</p>
-<pre><code class="language-cpp">// Header includes omitted for brevity
-void main() {
-  std::cout &lt;&lt; foo::bar &lt;&lt; std::endl;
-}
-</code></pre>
-<p>As discussed in the <a href="./headers.html">Headers</a> section, this specific case will print a garbage number, since <code>bar</code> has not been initialized, but the point is that <code>bar</code> can be accessed using the scope operator.</p>
-<p>The other way to access bar is with <code>using</code>.</p>
-<pre><code class="language-cpp">// Header includes omitted for brevity
-using foo::bar;
-void main() {
+<p>Definitions should be kept to the source file</p>
+<pre><code class="language-cpp">/* my-class.cc */
+#include &lt;iostream&gt;
+#include "my-class.hh"
+
+void MyClass::foo() { // Use the scope operator to define the method
   std::cout &lt;&lt; bar &lt;&lt; std::endl;
 }
 </code></pre>
-<p>This does the same thing, but with 1 caveat: it does not work if there is already a global variable with the name <code>bar</code>.</p>
-<p>You can also <code>using</code> an entire namespace at a time:</p>
-<pre><code class="language-cpp">using namespace foo;
-void main() {
-  std::cout &lt;&lt; bar &lt;&lt; std::endl;
-}
+<h2 id="static-members-and-permissions"><a class="header" href="#static-members-and-permissions">Static members and permissions</a></h2>
+<p>A static member of a class has 2 important properties:</p>
+<ul>
+<li>They are global, not real class members
+<ul>
+<li>Therefore, anything can access these functions and variables, <em>without needing an instance of the class</em></li>
+</ul>
+</li>
+<li>They cannot access non-static member variables of the class
+<ul>
+<li>This is because the static member, since it doesn't need an instance to be used, also can't know what instance it might get to use.</li>
+</ul>
+</li>
+</ul>
+<p>Static members of classes behave almost identically to the way they would if the class was a namespace instead, except they can also access private class members. Lets see an example:</p>
+<pre><code class="language-cpp">class MyClass {
+ public:
+  static void foo() {
+    std::cout &lt;&lt; bar &lt;&lt; std::endl;
+  }
+ private:
+  int bar = 0;
+}; // This semicolon is important!
 </code></pre>
-<p>Similar syntax can be used to call functions that are inside a namespace, or define them. Do note, though, that you need to have the member function declared inside the namespace before you can do this!</p>
-<pre><code class="language-cpp">void foo::baz() {
-  std::cout &lt;&lt; "Hello world!" &lt;&lt; std::endl;
+<p>This works, and can be called from anywhere in the program, however other parts of the program <em>cannot</em> directly read <code>bar</code>. Similarly, any static functions declared in the <code>private</code> area can't be accessed outside of the class (except by <code>friend</code> functions, but these are an advanced topic that I will not be covering).</p>
+<p>One other thing you should know is that when declaring a static variable in a class declaration (which should be in a header), you should not use the <code>extern</code> keyword.</p>
+<h2 id="class-instances"><a class="header" href="#class-instances">Class instances</a></h2>
+<p>An instance of a class is similar to an instance of any other variable. Similar to integers, if you have a class called <code>MyClass</code>, you can have multiple independent instances of the class, and these instances will not share member variables.</p>
+<h2 id="member-methods"><a class="header" href="#member-methods">Member methods</a></h2>
+<p>As discussed above, a class member method is basically just a function inside the class. Non-static member methods can access other non-static methods within the class, as well as instance variables, and, like other functions, they can access anything global, including everything in the class's static namespace.</p>
+<p>To access instance variables or methods in a non-static method, you can just reference them by name. To access them outside of the method, you have to use the <code>.</code> operator.</p>
+<pre><code class="language-cpp">class MyClass {
+ public:
+  void foo();
+
+  void bar() {
+    foo(); // This is allowed because bar is non-static
+  }
+};
+
+void MyClass::foo() { // Notice this is non-static
+  // Code here
 }
 
-void main() {
-  foo::baz();
-}
-</code></pre>
-<p>Namespaces can also be nested inside one another</p>
-<pre><code class="language-cpp">namespace foo {
-  namespace bar {
-    int baz = 69;
-  }
-
-  void quux() {
-    // Since foo::quux is a member of foo, it can directly access members of foo
-    std::cout &lt;&lt; bar::baz &lt;&lt; std::endl;
-  }
+void MyClass::bar() { // Notice this is non-static
+  foo(); // This can directly call foo
 }
 
-// This global function has the same name, but is not in the namespace, so the compiler pretends it has its own name
+int main() {
 
-void quux() {
-  // And because it isn't in the namespace, it has to use the scope operator
-  std::cout &lt;&lt; foo::bar::baz &lt;&lt; std::endl;
+  MyClass::foo(); // This fails because `foo` is not static, and so it needs an instance to work with
+
+  MyClass instance; // Class name followed by variable name, just like declaring an int
+  instance.foo(); // Call foo
+  return 0;
 }
 </code></pre>
-<p>Generally, when you reference a variable or function name, C++ will check from the innermost scope outward, until it reaches the global scope. The insides of functions (and, in fact, any if statements, loops, or other code blocks inside the function) count too, so in the example of <code>foo::quux</code>, if you attemped to access a variable named <code>thud</code>, the compiler will search for:</p>
-<ol>
-<li>A variable named <code>thud</code> inside the <code>quux</code> function</li>
-<li>A variable named <code>thud</code> in the <code>foo</code> namespace</li>
-<li>A variable named <code>thud</code> in the global namespace</li>
-</ol>
-<p>However, lets say you have something like this:</p>
-<pre><code class="language-cpp">int thud = 2;
-namespace foo {
-  int thud = 1;
-  
-  void quux() {
-    int thud = 0;
-    std::cout &lt;&lt; thud &lt;&lt; std::endl; // This will print 0
-  }
+<p>If you want to be more specific (which is highly recommended), you can use the special <code>this</code> pointer with the <code>-&gt;</code> operator to access instance variables and methods inside a method.</p>
+<pre><code class="language-cpp">void MyClass::bar() {
+  this-&gt;foo(); // This works too
 }
 </code></pre>
-<p>In this case, calling <code>quux</code> would cause the program to print <code>0</code>, since the first variable named <code>thud</code> that the compiler finds would be the local variable declared inside the function. If you want to access the global named <code>thud</code>, you can use the scope operator with nothing before it:</p>
-<pre><code class="language-cpp">int thud = 2;
-namespace foo {
-  int thud = 1;
-  
-  void quux() {
-    int thud = 0;
-    std::cout &lt;&lt; ::thud &lt;&lt; std::endl; // This will print 2
-  }
-}
-</code></pre>
-<p>More generally, a <code>::</code> with nothing before it tells the compiler that the variable or function we are looking for is relative to the global namespace. Therefore, to access <code>foo::thud</code>, we can do this:</p>
-<pre><code class="language-cpp">int thud = 2;
-namespace foo {
-  int thud = 1;
-  
-  void quux() {
-    int thud = 0;
-    std::cout &lt;&lt; ::foo::thud &lt;&lt; std::endl; // This will print 1
-  }
-}
-</code></pre>
-<p>Generally, namespaces are not something that is super important to use outside of developing libraries, unless a project gets very large and really needs the organization, however they are necessary to fully understand what is going on with most libraries.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../../guide/code-quality/organization/headers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../../guide/code-quality/organization/namespaces.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../../guide/code-quality/organization/classes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../../guide/code-quality/styling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -297,11 +284,11 @@ namespace foo {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../../guide/code-quality/organization/headers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../../guide/code-quality/organization/namespaces.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../../guide/code-quality/organization/classes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../../guide/code-quality/styling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
