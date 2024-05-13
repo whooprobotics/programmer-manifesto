@@ -124,3 +124,5 @@ namespace foo {
   }
 }
 ```
+
+Generally, namespaces are not something that is super important to use outside of developing libraries, unless a project gets very large and really needs the organization, however they are necessary to fully understand what is going on with most libraries.
