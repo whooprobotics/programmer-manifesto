@@ -8,4 +8,6 @@
   - [Organization](./guide/code-quality/organization.md)
     - [Header and Source Files](./guide/code-quality/organization/headers.md)
     - [Namespaces](./guide/code-quality/organization/namespaces.md)
+    - [Folder Structure]()
+    - [Classes]()
   - [Styling](./guide/code-quality/styling.md)
