@@ -91,7 +91,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Vex Programmer's Manifesto</li><li class="chapter-item expanded "><a href="guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="guide/code-quality/organization/namespaces.html"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li></ol></li><li class="chapter-item expanded "><a href="guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Vex Programmer's Manifesto</li><li class="chapter-item expanded "><a href="guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="guide/code-quality/organization/namespaces.html"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.1.3.</strong> Folder Structure</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.1.4.</strong> Classes</div></li></ol></li><li class="chapter-item expanded "><a href="guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -439,6 +439,64 @@ void main() {
 
 void main() {
   foo::baz();
+}
+</code></pre>
+<p>Namespaces can also be nested inside one another</p>
+<pre><code class="language-cpp">namespace foo {
+  namespace bar {
+    int baz = 69;
+  }
+
+  void quux() {
+    // Since foo::quux is a member of foo, it can directly access members of foo
+    std::cout &lt;&lt; bar::baz &lt;&lt; std::endl;
+  }
+}
+
+// This global function has the same name, but is not in the namespace, so the compiler pretends it has its own name
+
+void quux() {
+  // And because it isn't in the namespace, it has to use the scope operator
+  std::cout &lt;&lt; foo::bar::baz &lt;&lt; std::endl;
+}
+</code></pre>
+<p>Generally, when you reference a variable or function name, C++ will check from the innermost scope outward, until it reaches the global scope. The insides of functions (and, in fact, any if statements, loops, or other code blocks inside the function) count too, so in the example of <code>foo::quux</code>, if you attemped to access a variable named <code>thud</code>, the compiler will search for:</p>
+<ol>
+<li>A variable named <code>thud</code> inside the <code>quux</code> function</li>
+<li>A variable named <code>thud</code> in the <code>foo</code> namespace</li>
+<li>A variable named <code>thud</code> in the global namespace</li>
+</ol>
+<p>However, lets say you have something like this:</p>
+<pre><code class="language-cpp">int thud = 2;
+namespace foo {
+  int thud = 1;
+  
+  void quux() {
+    int thud = 0;
+    std::cout &lt;&lt; thud &lt;&lt; std::endl; // This will print 0
+  }
+}
+</code></pre>
+<p>In this case, calling <code>quux</code> would cause the program to print <code>0</code>, since the first variable named <code>thud</code> that the compiler finds would be the local variable declared inside the function. If you want to access the global named <code>thud</code>, you can use the scope operator with nothing before it:</p>
+<pre><code class="language-cpp">int thud = 2;
+namespace foo {
+  int thud = 1;
+  
+  void quux() {
+    int thud = 0;
+    std::cout &lt;&lt; ::thud &lt;&lt; std::endl; // This will print 2
+  }
+}
+</code></pre>
+<p>More generally, a <code>::</code> with nothing before it tells the compiler that the variable or function we are looking for is relative to the global namespace. Therefore, to access <code>foo::thud</code>, we can do this:</p>
+<pre><code class="language-cpp">int thud = 2;
+namespace foo {
+  int thud = 1;
+  
+  void quux() {
+    int thud = 0;
+    std::cout &lt;&lt; ::foo::thud &lt;&lt; std::endl; // This will print 1
+  }
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="styling"><a class="header" href="#styling">Styling</a></h1>
