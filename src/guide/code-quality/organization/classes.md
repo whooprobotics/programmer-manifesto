@@ -101,3 +101,135 @@ void MyClass::bar() {
   this->foo(); // This works too
 }
 ```
+
+## Inheritance
+
+Inheritance is a property where a class can be a descendant of another class, and have all of the parent class's properties. Lets consider this example:
+
+```cpp
+class Animal {
+ public:
+  int get_id_number() {
+    return id_number;
+  }
+ private:
+  int id_number {0}; // ID number defaults to 0
+};
+
+class Dog: Animal { // Dog "extends" animal
+  int bark() {
+    // Code that makes the dog bark
+  }
+};
+```
+
+In this case, we call `Dog` a "subclass" of `Animal`. This means `Dog` can do anything `Animal` can do, so we can do something like this:
+
+```cpp
+int main() {
+  Dog striker;
+  std::cout << striker.get_id_number() << std::endl; // Dog can do anything Animal can do, because it is an Animal
+  striker.bark(); // Dog still gets to do its dog things
+}
+```
+
+Importantly, `Dog` doesn't just get all of the properties of `Animal`, rather it *is* an `Animal`, and it can be cast to one.
+
+```cpp
+int main() {
+  Dog striker;
+  Animal stranger = striker;
+  std::cout << stranger.get_id_number() << std::endl; // stranger is just striker with less information
+  stranger.bark(); // Since stranger isnt of the Dog type, you can't do this
+  striker.bark(); // But this still works
+}
+```
+
+Another important thing with class inheritance is the `protected` visibility level. In the above example, `Dog` cannot directly access `id_number`, because it is `private`, however if it was `protected`, `Dog` would be able to access it. Essentially, `protected` is the same as `private` from the perspective of outside observers, but it is the same as `public` from the perspective of subclasses.
+
+## Virtual Methods
+
+A virtual method is a method which can be overriden by subclasses, and which will remain overridden even when cast to the parent class. Here is an example without using virtual:
+
+```cpp
+class Animal {
+ public:
+  const char* const get_species() {
+    return "unknown unknown";
+  }
+};
+
+class Dog: Animal {
+ public:
+  const char* const get_species() {
+    return "canis familiaris";
+  }
+}
+
+int main() {
+  Dog striker;
+  std::cout << striker.get_species() << std::endl; // canis familiaris
+  std::cout << (Animal)striker.get_species() << std::endl; // unknown unknown
+}
+```
+
+In this case, after casting to `Animal`, the program resolves to use the `Animal` definition of `get_species`. This behavior can be changed with the `virtual` keyword:
+
+```cpp
+class Animal {
+ public:
+  // Adding in virtual here
+  virtual const char* const get_species() {
+    return "unknown unknown";
+  }
+};
+
+class Dog: Animal {
+ public:
+  // "override" here allows the compiler to warn us if its not overriding properly
+  const char* const get_species() override {
+    return "canis familiaris";
+  }
+}
+
+int main() {
+  Dog striker;
+  std::cout << striker.get_species() << std::endl; // canis familiaris
+  std::cout << (Animal)striker.get_species() << std::endl; // canis familiaris
+}
+```
+
+This time, we get the output we wanted, even after casting to `Animal`.
+
+## Pure virtuals, Abstract classes, and Interfaces
+
+A pure virtual method is a method which *does not exist until it is overriden by a subclass.* These have their uses, and are created like this:
+
+```cpp
+class Animal {
+ public:
+  // The = 0 makes this a pure virtual
+  virtual const char* const get_species() = 0;
+};
+
+class Dog: Animal {
+ public:
+  const char* const get_species() override {
+    return "canis familiaris";
+  }
+}
+```
+
+A class which contains pure virtual methods is called an "abstract class", and instances cannot be defined directly; so this is okay:
+
+```cpp
+Dog striker;
+Animal stranger = striker; // This will know to use the `Dog` version of `get_species()`
+```
+
+but this is not:
+```cpp
+Animal stranger; // This will have 1 or more method that it won't know where to look for!
+```
+
+Finally, an interface is an abstract class which has *no member variables* and all of its member methods must be pure virtual. Interfaces are useful if you follow the design principle of minimizing the responsibility of any given part of the program, and so they can be reused by many classes that might fulfill similar purposes, such as different implementations of odometry systems.
