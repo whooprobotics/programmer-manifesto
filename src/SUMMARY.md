@@ -10,4 +10,9 @@
     - [Namespaces](./guide/code-quality/organization/namespaces.md)
     - [Classes](./guide/code-quality/organization/classes.md)
     - [File and Folder Structure]()
+    - [Git]()
   - [Styling](./guide/code-quality/styling.md)
+
+---
+
+[Contributors](./contributors.md)
