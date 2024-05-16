@@ -223,13 +223,13 @@ class Dog: Animal {
 A class which contains pure virtual methods is called an "abstract class", and instances cannot be defined directly; so this is okay:
 
 ```cpp
-Dog striker;
-Animal stranger = striker; // This will know to use the `Dog` version of `get_species()`
+// We're using pointers because just having Animal as a type isn't really possible
+Animal* striker = new Dog(); // This will know to use the `Dog` version of `get_species()`
 ```
 
 but this is not:
 ```cpp
-Animal stranger; // This will have 1 or more method that it won't know where to look for!
+Animal* stranger = new Animal(); // This will have 1 or more method that it won't know where to look for!
 ```
 
 Finally, an interface is an abstract class which has *no member variables* and all of its member methods must be pure virtual. Interfaces are useful if you follow the design principle of minimizing the responsibility of any given part of the program, and so they can be reused by many classes that might fulfill similar purposes, such as different implementations of odometry systems.
