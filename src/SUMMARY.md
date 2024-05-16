@@ -9,9 +9,10 @@
     - [Header and Source Files](./guide/code-quality/organization/headers.md)
     - [Namespaces](./guide/code-quality/organization/namespaces.md)
     - [Classes](./guide/code-quality/organization/classes.md)
-    - [File and Folder Structure]()
+    - [File and Folder Structure](./guide/code-quality/organization/file-structure.md)
     - [Git]()
   - [Styling](./guide/code-quality/styling.md)
+  - [Abstraction](./guide/code-quality/abstraction.md)
 
 ---
 
