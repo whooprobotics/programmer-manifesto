@@ -9,3 +9,5 @@ title = "The Vex Programmer's Manifesto"
 mathjax-support = true
 git-repository-url = "https://github.com/whooprobotics/programmer-manifesto/tree/master"
 edit-url-template = "https://github.com/whooprobotics/programmer-manifesto/tree/master/{path}"
+
+[preprocessor.alerts]
