@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Namespaces - The Vex Programmer&#x27;s Manifesto</title>
+        <title>Git - The Vex Programmer&#x27;s Manifesto</title>
 
 
         <!-- Custom HTML head -->
@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Vex Programmer's Manifesto</li><li class="chapter-item expanded "><a href="../../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/namespaces.html" class="active"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/classes.html"><strong aria-hidden="true">1.1.3.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/file-structure.html"><strong aria-hidden="true">1.1.4.</strong> File and Folder Structure</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/git-usage.html"><strong aria-hidden="true">1.1.5.</strong> Git</a></li></ol></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/abstraction.html"><strong aria-hidden="true">1.3.</strong> Abstraction</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../../contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">The Vex Programmer's Manifesto</li><li class="chapter-item expanded "><a href="../../../guide/code-quality/code-quality.html"><strong aria-hidden="true">1.</strong> Writing better code</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization.html"><strong aria-hidden="true">1.1.</strong> Organization</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/headers.html"><strong aria-hidden="true">1.1.1.</strong> Header and Source Files</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/namespaces.html"><strong aria-hidden="true">1.1.2.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/classes.html"><strong aria-hidden="true">1.1.3.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/file-structure.html"><strong aria-hidden="true">1.1.4.</strong> File and Folder Structure</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/organization/git-usage.html" class="active"><strong aria-hidden="true">1.1.5.</strong> Git</a></li></ol></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/styling.html"><strong aria-hidden="true">1.2.</strong> Styling</a></li><li class="chapter-item expanded "><a href="../../../guide/code-quality/abstraction.html"><strong aria-hidden="true">1.3.</strong> Abstraction</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../../contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -152,7 +152,7 @@
                         <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master/src/guide/code-quality/organization/namespaces.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/whooprobotics/programmer-manifesto/tree/master/src/guide/code-quality/organization/git-usage.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -181,113 +181,91 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="namespaces"><a class="header" href="#namespaces">Namespaces</a></h1>
-<p>Namespaces are an extremely useful feature in C++. Like how folders allow you to sort files, namespaces allow you to sort functions, variables, and other declarations. The basic structure of a namespace is this:</p>
-<pre><code class="language-cpp">namespace foo {
-  int bar;
-  void baz();
+                        <h1 id="git"><a class="header" href="#git">Git</a></h1>
+<p>One of the most important tools any developer has is version control. The most popular version control software is Git, and that is what most people in Vex, including Aggie Robotics, use.</p>
+<h2 id="repositories"><a class="header" href="#repositories">Repositories</a></h2>
+<p>A project in Git is called a repository. It is typically the entire contents of a folder containing your program's source code, with a few files excluded. In addition, a repository has a lot of metadata associated with it, particularly the history of changes to the repository, as well as branches and tags. Every repository starts out empty, and all content is saved through these commits.</p>
+<h2 id="commits"><a class="header" href="#commits">Commits</a></h2>
+<p>A "commit" is a set of changes applied to a repository, referenced by a hash. Every commit (except the initial commit) has a reference to its parent commit; that is the version of the code immediately before it. For example, if you have the following code:</p>
+<pre><code class="language-cpp">void main() {
+  // TODO: Do nothing
 }
 </code></pre>
-<p>Definitions can also be put inside a namespace, however namespace declarations like above are best kept in header files.</p>
-<p>From outside of a namespace, there are 2 ways to access its internals. You can use the scope operator <code>::</code>, as follows:</p>
-<pre><code class="language-cpp">// Header includes omitted for brevity
-void main() {
-  std::cout &lt;&lt; foo::bar &lt;&lt; std::endl;
-}
-</code></pre>
-<p>As discussed in the <a href="./headers.html">Headers</a> section, this specific case will print a garbage number, since <code>bar</code> has not been initialized, but the point is that <code>bar</code> can be accessed using the scope operator.</p>
-<p>The other way to access bar is with <code>using</code>.</p>
-<pre><code class="language-cpp">// Header includes omitted for brevity
-using foo::bar;
-void main() {
-  std::cout &lt;&lt; bar &lt;&lt; std::endl;
-}
-</code></pre>
-<p>This does the same thing, but with 1 caveat: it does not work if there is already a global variable with the name <code>bar</code>.</p>
-<p>You can also <code>using</code> an entire namespace at a time:</p>
-<pre><code class="language-cpp">using namespace foo;
-void main() {
-  std::cout &lt;&lt; bar &lt;&lt; std::endl;
-}
-</code></pre>
-<p>Similar syntax can be used to call functions that are inside a namespace, or define them. Do note, though, that you need to have the member function declared inside the namespace before you can do this!</p>
-<pre><code class="language-cpp">void foo::baz() {
+<p>and you change it to this and commit:</p>
+<pre><code class="language-cpp">void main() {
   std::cout &lt;&lt; "Hello world!" &lt;&lt; std::endl;
 }
-
-void main() {
-  foo::baz();
-}
 </code></pre>
-<p>Namespaces can also be nested inside one another</p>
-<pre><code class="language-cpp">namespace foo {
-  namespace bar {
-    int baz = 69;
-  }
-
-  void quux() {
-    // Since foo::quux is a member of foo, it can directly access members of foo
-    std::cout &lt;&lt; bar::baz &lt;&lt; std::endl;
-  }
-}
-
-// This global function has the same name, but is not in the namespace, so the compiler pretends it has its own name
-
-void quux() {
-  // And because it isn't in the namespace, it has to use the scope operator
-  std::cout &lt;&lt; foo::bar::baz &lt;&lt; std::endl;
-}
+<p>Then the commit is just a pointer to the previous version of the code, as well as metadata saying what was added and removed</p>
+<pre><code>line 2:
+-   // TODO: Do nothing
++   std::cout &lt;&lt; "Hello world!" &lt;&lt; std::endl;
 </code></pre>
-<p>Generally, when you reference a variable or function name, C++ will check from the innermost scope outward, until it reaches the global scope. The insides of functions (and, in fact, any if statements, loops, or other code blocks inside the function) count too, so in the example of <code>foo::quux</code>, if you attemped to access a variable named <code>thud</code>, the compiler will search for:</p>
-<ol>
-<li>A variable named <code>thud</code> inside the <code>quux</code> function</li>
-<li>A variable named <code>thud</code> in the <code>foo</code> namespace</li>
-<li>A variable named <code>thud</code> in the global namespace</li>
-</ol>
-<p>However, lets say you have something like this:</p>
-<pre><code class="language-cpp">int thud = 2;
-namespace foo {
-  int thud = 1;
-  
-  void quux() {
-    int thud = 0;
-    std::cout &lt;&lt; thud &lt;&lt; std::endl; // This will print 0
-  }
-}
-</code></pre>
-<p>In this case, calling <code>quux</code> would cause the program to print <code>0</code>, since the first variable named <code>thud</code> that the compiler finds would be the local variable declared inside the function. If you want to access the global named <code>thud</code>, you can use the scope operator with nothing before it:</p>
-<pre><code class="language-cpp">int thud = 2;
-namespace foo {
-  int thud = 1;
-  
-  void quux() {
-    int thud = 0;
-    std::cout &lt;&lt; ::thud &lt;&lt; std::endl; // This will print 2
-  }
-}
-</code></pre>
-<p>More generally, a <code>::</code> with nothing before it tells the compiler that the variable or function we are looking for is relative to the global namespace. Therefore, to access <code>foo::thud</code>, we can do this:</p>
-<pre><code class="language-cpp">int thud = 2;
-namespace foo {
-  int thud = 1;
-  
-  void quux() {
-    int thud = 0;
-    std::cout &lt;&lt; ::foo::thud &lt;&lt; std::endl; // This will print 1
-  }
-}
-</code></pre>
-<p>Generally, namespaces are not something that is super important to use outside of developing libraries, unless a project gets very large and really needs the organization, however they are necessary to fully understand what is going on with most libraries.</p>
+<blockquote>
+<p>[!NOTE]
+Multiple commits can have the same parent. We call these commits members of different branches.</p>
+</blockquote>
+<p>Another important concept with commits is immutability. By design, once a commit is made, it cannot be edited, and is always part of the repository. However, this usually isn't a problem</p>
+<h2 id="branches-and-tags"><a class="header" href="#branches-and-tags">Branches and Tags</a></h2>
+<p>Git has a few different types of named commits, which make it easier to reference a version of the code without remembering a hash.</p>
+<p>The first and most important named commit is <code>HEAD</code>. This references the currently active version of the code, be it the latest version on a branch, some old version, or any other version of the code throughout the repository.</p>
+<p>Another type of named commit is a branch. A branch name usually tracks the latest commit along the local copy of a specific branch within a repository.</p>
+<p>Tags are also a type of named commit. Unlike branches, a tag will always reference the commit where it was created. Tags also form the basis for Github's Releases feature.</p>
+<h2 id="merging-changes"><a class="header" href="#merging-changes">Merging Changes</a></h2>
+<p>When 2 branches diverge, it can be a pain to bring together the changes. Fortunately, Git has a tool specifically designed for that: the merge commit. A merge commit is a special type of commit that has 2 parents, so it can apply all of the changes of both branches together. During a merge, there are 2 parent branches to consider: the "base" branch, which is where the new commit is created, and the "incoming" branch. Git will automatically apply all of the changes from the incoming branch to the base branch when it can.</p>
+<p>Git can't always do everything on its own, though. Sometimes, the changes on 2 branches will conflict with one another. When this happens, it will require the programmer to manually edit the code before the merge commit can be completed.</p>
+<blockquote>
+<p>[!WARNING]
+Git is not perfect, and even if it "succeeds" at merging, it is possible for it to splice together code that doesn't work. You, the programmer, are responsible for looking through these changes and ensuring that it all works as expected. Automated testing can help with this.</p>
+</blockquote>
+<h2 id="git-flow"><a class="header" href="#git-flow">Git-flow</a></h2>
+<p>For development of ReveilLib, we like to use a specific branching model aimed at ensuring we always have stable code. This model is known as Git-flow. In essence there are 2 main branches:</p>
+<ul>
+<li>The <code>master</code> branch holds the latest stable release (not release candidate) code. Code that isn't competition-ready should never be included on this branch.</li>
+<li>The <code>develop</code> branch holds feature-complete code awaiting release. This code might contain bugs.</li>
+<li>The <code>gh-pages</code> branch contains autogenerated documentation, and its existence should be ignored for the most part. You will never commit or merge directly to this branch, and in fact it actually has no parent in common with any other branch on the repository.</li>
+</ul>
+<p>These main branches should <em>never</em> get code directly committed to them.</p>
+<p>As a general rule, <code>master</code> is always behind <code>develop</code>.</p>
+<p>There are also 3 other types of branches</p>
+<ul>
+<li>Branches of the form <code>hotfix-&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code> are for bug fixes on release code
+<ul>
+<li>These branches branch off of <code>master</code>, recieve direct commits to fix bugs, and then merge into <code>master</code> then <code>master</code> merges into <code>develop</code>.</li>
+<li>When these branches are merged into master, they also come with a new patch version number.</li>
+</ul>
+</li>
+<li>Branches of the form <code>release-&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code> are for major and minor releases
+<ul>
+<li>These branches branch off of <code>develop</code> and recieve direct commits to prepare them for release.</li>
+<li>Once a <code>release-</code> branch is complete, it is merged into <code>master</code> and then <code>master</code> into <code>develop</code>, and a new release is created on <code>master</code>.</li>
+<li>On a release branch, <code>&lt;patch&gt;</code> should always be <code>0</code></li>
+<li>While preparing for release, pre-releases (also known as release candidates) may be built and released based on this branch.</li>
+</ul>
+</li>
+<li>All other branches are called feature branches
+<ul>
+<li>Feature branches branch off of <code>develop</code></li>
+<li>A feature branch has usually 1 specific feature it aims to develop, or otherwise 1 change to functionality, or even just a refactor without a change to functionality</li>
+<li>Feature branches are merged directly back into <code>develop</code> once they are ready.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>References:</p>
+<ul>
+<li><a href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model - nvie.com</a></li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../../guide/code-quality/organization/headers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../../guide/code-quality/organization/file-structure.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../../guide/code-quality/organization/classes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../../guide/code-quality/styling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -297,11 +275,11 @@ namespace foo {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../../guide/code-quality/organization/headers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../../guide/code-quality/organization/file-structure.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../../guide/code-quality/organization/classes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../../guide/code-quality/styling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
