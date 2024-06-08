@@ -13,6 +13,17 @@
     - [Git](./guide/code-quality/organization/git-usage.md)
   - [Styling](./guide/code-quality/styling.md)
   - [Abstraction](./guide/code-quality/abstraction.md)
+  - [Testing]()
+- [Basic Vex Control Algorithms]()
+  - [Time based/open-loop]()
+  - [Naive closed-loop]()
+  - [PID control]()
+  - [Staged Progression]()
+  - [Linear Motion Profiling]()
+  - [2D Motion Profiling]()
+  - [Motion Profiling with correction]()
+  - [Pure Pursuit]()
+  - [Linear motion with correction]()
 
 ---
 
